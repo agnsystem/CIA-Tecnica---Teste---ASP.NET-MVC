@@ -1,0 +1,50 @@
+﻿@model IEnumerable<CiaTecnica.Models.Cliente>
+
+@{
+    ViewBag.Title = "Lista de Clientes";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Lista de Clientes</h2>
+
+<p>
+    @Html.ActionLink("Novo Cliente", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.IdCliente)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NrCpfCnpj)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NmClienteRazao)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NmSobreFantasia)
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.IdCliente)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NrCpfCnpj)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NmClienteRazao)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NmSobreFantasia)
+        </td>
+        <td>
+            @Html.ActionLink("Editar", "Edit", new { Id=item.IdCliente }) |
+            @Html.ActionLink("Detalhe", "Details", new { Id = item.IdCliente }) |
+            @Html.ActionLink("Excluir", "Delete", new { Id = item.IdCliente })
+        </td>
+    </tr>
+}
+</table>

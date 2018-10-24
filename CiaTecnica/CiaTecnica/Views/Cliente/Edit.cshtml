@@ -1,0 +1,118 @@
+﻿@model CiaTecnica.Models.Cliente
+
+@{
+    ViewBag.Title = "Editar Cliente";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    List<CiaTecnica.Models.TipoPessoa> listaTipoPessoa = ViewBag.listaTipoPessoa;
+    List<CiaTecnica.Models.Estado> listaEstados = ViewBag.listaEstados;
+}
+
+<h2>Editar Cliente</h2>
+<hr />
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-2">
+                @Html.LabelFor(model => model.IdCliente)
+                @Html.TextBoxFor(model => model.IdCliente, new { Class = "form-control input-sm", @readonly = "readonly" })
+            </div>
+            <div class="col-md-offset-2 col-md-4">
+                @Html.LabelFor(model => model.TpPessoa)
+                @*@Html.TextBoxFor(model => model.TpPessoa, new { @class = "form-control input-sm" })*@
+                <select id="TpPessoa" name="TpPessoa" Class="form-control input-sm" style="height:22px; font-size:10px">
+                    @foreach (CiaTecnica.Models.TipoPessoa item in listaTipoPessoa)
+                    {
+                        <option value="@item.IdTipoPessoa"
+                                @if (item.IdTipoPessoa == Model.TpPessoa)
+                                 { 
+                                    @: selected
+                                 }>@item.NmTipoPessoa</option>
+                    }
+                </select>
+            </div>
+            <div class="col-md-4">
+                @Html.LabelFor(model => model.NrCpfCnpj)
+                @Html.TextBoxFor(model => model.NrCpfCnpj, new { Class = "form-control input-sm" })
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-md-4">
+                @Html.LabelFor(model => model.NmClienteRazao)
+                @Html.TextBoxFor(model => model.NmClienteRazao, new { @class = "form-control input-sm" })
+            </div>
+            <div class="col-md-4">
+                @Html.LabelFor(model => model.NmSobreFantasia)
+                @Html.TextBoxFor(model => model.NmSobreFantasia, new { @class = "form-control input-sm" })
+            </div>
+            <div class="col-md-4">
+                @Html.LabelFor(model => model.DtNascimento)
+                @Html.TextBoxFor(model => model.DtNascimento, new { @class = "form-control input-sm" })
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-md-2">
+                @Html.LabelFor(model => model.NrCep)
+                @Html.TextBoxFor(model => model.NrCep, new { @class = "form-control input-sm" })
+            </div>
+            <div class="col-md-4">
+                @Html.LabelFor(model => model.NmLogradouro)
+                @Html.TextBoxFor(model => model.NmLogradouro, new { @class = "form-control input-sm" })
+            </div>
+            <div class="col-md-2">
+                @Html.LabelFor(model => model.NrNumero)
+                @Html.TextBoxFor(model => model.NrNumero, new { @class = "form-control input-sm" })
+            </div>
+            <div class="col-md-4">
+                @Html.LabelFor(model => model.NmComplemento)
+                @Html.TextBoxFor(model => model.NmComplemento, new { @class = "form-control input-sm" })
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-md-4">
+                @Html.LabelFor(model => model.NmBairro)
+                @Html.TextBoxFor(model => model.NmBairro, new { @class = "form-control input-sm" })
+            </div>
+            <div class="col-md-4">
+                @Html.LabelFor(model => model.NmCidade)
+                @Html.TextBoxFor(model => model.NmCidade, new { @class = "form-control input-sm" })
+            </div>
+            <div class="col-md-4">
+                @Html.LabelFor(model => model.NmUF)
+                @*@Html.TextBoxFor(model => model.NmUF, new { @class = "form-control input-sm" })*@
+                <select id="NmUF" name="NmUF" Class="form-control input-sm" style="height:22px; font-size:10px">
+                    @foreach (CiaTecnica.Models.Estado item in listaEstados)
+                    {
+                        <option value="@item.NmUF"
+                                @if (item.NmUF == Model.NmUF)
+                                 { 
+                                    @: selected
+                                 }>@item.NmEstado</option>
+                    }
+                </select>
+            </div>
+        </div>
+        <br />
+        <div class="form-group">
+            <div class="col-md-offset-10 col-md-2">
+                <input type="submit" value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Salvar &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" class="btn btn-sm btn-success" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Voltar", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
